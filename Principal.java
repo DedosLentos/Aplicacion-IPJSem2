@@ -1,5 +1,5 @@
 package aplicacion;
-
+//Clase Principal, en ella se define la interfaz donde se ingresan los usuarios, se accede a menú ingresar Vehículo, y más!
 import java.awt.EventQueue; 
 
 import javax.swing.JFrame;
@@ -31,10 +31,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 
-
 public class Principal {
 
-
+	//La biblia de Atributos de la clase Principal
 	public JFrame frmDarDeAlta;
 	public JTextField textNombre;
 	public JTextField textApellido;
@@ -48,16 +47,17 @@ public class Principal {
 	private JLabel lblCantHijos;
 	private JLabel lblDpto;
 	private JButton btnFecha;
-	ArrayList<Persona> persona=new ArrayList<>();
 	private JButton btnSalir;
-	private JButton btnNewButton;
+	private JButton btnmostrarLista;
 	private JButton btnBuscar;
 	private JTextField textBusqueda;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JLabel lblFechanac;
 	private JTextField textFechaNacimiento;
+	ArrayList<Persona> persona=new ArrayList<>();
 
+	//Método main donde se crea la ventana
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,17 +70,17 @@ public class Principal {
 				}
 			}
 		});
-
-		
 	}
 
-
+	//Método que inicializa algo
 	public Principal() {
 		initialize();
 	}
 
 
 	private void initialize() {
+
+		//Crea el frame y define caracteristicas
 		frmDarDeAlta = new JFrame();
 		frmDarDeAlta.setResizable(false);
 		frmDarDeAlta.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\titof\\OneDrive\\Escritorio\\Pablo\\LTI\\Semestre I\\5-Programaci\u00F3n en Java\\Semana 1\\Cod2.png"));
@@ -88,38 +88,47 @@ public class Principal {
 		frmDarDeAlta.setBounds(100, 100, 492, 633);
 		frmDarDeAlta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		//Crea y define caracteristicas de campo de texto Nombre
 		textNombre = new JTextField();
 		textNombre.setBounds(177, 70, 119, 19);
 		textNombre.setColumns(10);
 
+		//Crea y define caracteristicas de campo de texto Apellido
 		textApellido = new JTextField();
 		textApellido.setBounds(177, 107, 119, 19);
 		textApellido.setColumns(10);
 
+		//Crea y define caracteristicas de campo de texto ID
 		textID = new JTextField();
 		textID.setBounds(177, 32, 119, 19);
 		textID.setColumns(10);
 
+		////Crea y define caracteristicas de campo de texto FechaAct
 		textFechaAct = new JTextField();
 		textFechaAct.setBounds(177, 255, 119, 19);
 		textFechaAct.setColumns(10);
 
+		//Crea y define caracteristicas de campo de texto CantHijos
 		textCantHijos = new JTextField();
 		textCantHijos.setBounds(177, 144, 119, 19);
 		textCantHijos.setColumns(10);
 
+		//Crea y define caracteristicas de campo de texto DptoResidencia
 		textDptoResidencia = new JTextField();
 		textDptoResidencia.setBounds(177, 177, 119, 19);
 		textDptoResidencia.setColumns(10);
 
-
+		////Crea y define caractersiticas del botón Fecha, este devuelve la fecha actual
 		btnFecha = new JButton("Fecha Actual");
 		btnFecha.setBounds(10, 252, 147, 25);
 		btnFecha.setFont(new Font("Arial", Font.PLAIN, 13));
+
+
 		btnFecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		//Método que devuelve la fecha actual
 		btnFecha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -130,10 +139,11 @@ public class Principal {
 			}
 		});
 
-
+		//Crea y define el campo de texto Resultados
 		JTextPane textResultados = new JTextPane();
 		textResultados.setBounds(10, 332, 457, 101);
 
+		//Crea y define boton Ingrese Persona, este asignara el usuario ingresado a la lista
 		JButton btnIngresePersona = new JButton("Dar de alta");
 		btnIngresePersona.setBounds(177, 297, 119, 25);
 		btnIngresePersona.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -141,8 +151,9 @@ public class Principal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				//Método que recibe lo ingresado por el usuario a variables, las agrega a un objeto persona y lo suma a la lista
 				try {
-
+					//Variables
 					int idPersona;
 					String nombre;
 					String apellido;
@@ -150,7 +161,8 @@ public class Principal {
 					byte cantHijos;
 					LocalDate fechaNac;
 					LocalDate fechaAct;
-					
+
+					//Recibe lo ingresado en los campos de texto y los asigna a las variables
 					idPersona = Integer.parseInt(textID.getText());			
 					nombre = textNombre.getText();		
 					apellido = textApellido.getText();		
@@ -158,11 +170,12 @@ public class Principal {
 					cantHijos = (byte) Integer.parseInt(textCantHijos.getText());
 					fechaNac=LocalDate.parse(textFechaNacimiento.getText());
 					fechaAct=LocalDate.parse(textFechaAct.getText());
-					
 
+					//Instancia Persona y lo agrega a la lista
 					Persona var=new Persona(idPersona,nombre,apellido,dptoResidencia,cantHijos,fechaNac,fechaAct);
 					persona.add(var);
-					
+
+					//Borra los campos luego de dar de alta un usuario
 					textID.setText("");
 					textNombre.setText("");
 					textApellido.setText("");
@@ -170,12 +183,12 @@ public class Principal {
 					textCantHijos.setText("");
 					textFechaNacimiento.setText("");
 					textFechaAct.setText("");
-					
-					
+
+					//El for de Copperfield
 					for (Persona g: persona)
 						System.out.println(g);
 
-					
+					//Si no se ingresa valor en algún campo devuelve un mensaje de aviso
 				}catch(Exception ex) {
 					if(textID.getText().equals("")|| textFechaNacimiento.getText().equals("") || textNombre.getText().equals("") || textApellido.getText().equals("")||textDptoResidencia.getText().equals("")|| textCantHijos.getText().equals("")||textFechaAct.getText().equals("")) {
 
@@ -187,11 +200,14 @@ public class Principal {
 
 		});
 
+		//Crea botón Buscar, define caracteristicas y el método
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addMouseListener(new MouseAdapter() {
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				//Método roto
 				String buscarNombre;
 				buscarNombre=(textResultados.getText());
 				Persona encontre;
@@ -209,31 +225,38 @@ public class Principal {
 				}
 			}
 		});
+
+		//Define y añade el botón Buscar
 		btnBuscar.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnBuscar.setBounds(317, 499, 119, 21);
 		frmDarDeAlta.getContentPane().add(btnBuscar);
 
-
+		//Crea y define etiqueta ID
 		lblID = new JLabel("ID:");
 		lblID.setBounds(120, 32, 23, 27);
 		lblID.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		//Crea y define etiqueta Nombre
 		lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(75, 64, 70, 27);
 		lblNombre.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		//Crea y define etiqueta Apellido
 		lblApellido = new JLabel("Apellido:");
 		lblApellido.setBounds(75, 101, 67, 27);
 		lblApellido.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		//Crea y define etiqueta CantHijos
 		lblCantHijos = new JLabel("Hijos:");
 		lblCantHijos.setBounds(99, 138, 46, 22);
 		lblCantHijos.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		//Crea y define etiqueta Departamento
 		lblDpto = new JLabel("Departamento:");
 		lblDpto.setBounds(29, 173, 155, 22);
 		lblDpto.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		//Crea y define métodos de botón Salir
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnSalir.setBounds(339, 451, 70, 21);
@@ -243,6 +266,8 @@ public class Principal {
 				System.exit(0);
 			}
 		});
+
+		//Agrega etiquetas, botones, etc.
 		frmDarDeAlta.getContentPane().setLayout(null);
 		frmDarDeAlta.getContentPane().add(btnIngresePersona);
 		frmDarDeAlta.getContentPane().add(lblNombre);
@@ -260,42 +285,49 @@ public class Principal {
 		frmDarDeAlta.getContentPane().add(btnSalir);
 		frmDarDeAlta.getContentPane().add(textResultados);
 
-		btnNewButton = new JButton("Mostrar Lista");
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		//Botón Mostrar lista, correcto, muestra la lista
+		btnmostrarLista = new JButton("Mostrar Lista");
+		btnmostrarLista.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnmostrarLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				textResultados.setText(String.valueOf(persona));
 			}
 		}
 				);
-	
 
-		btnNewButton.setBounds(54, 451, 119, 21);
-		frmDarDeAlta.getContentPane().add(btnNewButton);
-
+		//Añade y define boton Mostrar Lista
+		btnmostrarLista.setBounds(54, 451, 119, 21);
+		frmDarDeAlta.getContentPane().add(btnmostrarLista);
+		
+		//Define y crea campo de texto Busqueda
 		textBusqueda = new JTextField();
 		textBusqueda.setFont(new Font("Arial", Font.PLAIN, 13));
 		textBusqueda.setBounds(42, 500, 254, 19);
 		frmDarDeAlta.getContentPane().add(textBusqueda);
 		textBusqueda.setColumns(10);
 		
+		//crea y define etiqueta FechaNac
 		lblFechanac = new JLabel("FechaNac:");
 		lblFechanac.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblFechanac.setBounds(56, 208, 102, 22);
 		frmDarDeAlta.getContentPane().add(lblFechanac);
 		
+		//define y crea campo de texto FechaNacimiento
 		textFechaNacimiento = new JTextField();
 		textFechaNacimiento.setColumns(10);
 		textFechaNacimiento.setBounds(177, 212, 119, 19);
 		frmDarDeAlta.getContentPane().add(textFechaNacimiento);
-
+		
+		//Crea la barra del menu superior, donde esta borrar y compania
 		JMenuBar menuBar = new JMenuBar();
 		frmDarDeAlta.setJMenuBar(menuBar);
 
+		//Crea y define botón borrar y sus métodos
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.setFont(new Font("Arial", Font.PLAIN, 10));
 		btnBorrar.addMouseListener(new MouseAdapter() {
+			//Borra los campos de texto manualmente
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				textID.setText(String.valueOf(""));
@@ -306,8 +338,10 @@ public class Principal {
 				textFechaAct.setText(" ");
 			}			
 		});
+		//añade el botón
 		menuBar.add(btnBorrar);
 
+		//Crea y define boton Ingresar vehiculo, tiene el método que abre una nueva ventana del tipo VehiculoVentana
 		btnNewButton_1 = new JButton("Ingresar Veh\u00EDculo");
 		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 10));
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
@@ -318,10 +352,13 @@ public class Principal {
 
 			}
 		});
+		//añade el botón
 		menuBar.add(btnNewButton_1);
-		
+
+		//Añade boton verificar funcionamiento y devuelve la lista al derecho y al revés
 		btnNewButton_2 = new JButton("Verificar Funcionamiento");
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ArrayList<Vehiculo>listVeh=new ArrayList<Vehiculo>();
@@ -333,15 +370,16 @@ public class Principal {
 				listVeh.add(v2);
 				listVeh.add(b1);
 
-				
+				//imprime un mensaje con la lista
 				JOptionPane.showInternalMessageDialog(null,"las listas funcionan bien:"+ "\n+"+ listVeh );
-				
+				//este for da vuelta la lista
 				for(int i=0;i<listVeh.size();i++) {
 					Collections.reverse(listVeh);
-					
+
 				}
+				//imprime un mensaje con la lista invertida
 				JOptionPane.showInternalMessageDialog(null,"las listas funcionan bien:"+ "\n+"+ listVeh );
-				
+
 			}
 		});
 		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 10));
