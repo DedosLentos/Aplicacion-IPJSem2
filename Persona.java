@@ -1,5 +1,5 @@
 package aplicacion;
-
+//Clase Persona
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 public class Persona {
 
+//Atributos de Persona
 private int idPersona;
 private String nombre;
 private String apellido;
@@ -17,15 +18,16 @@ private String dptoResidencia;
 private byte cantHijos;
 private LocalDate fechaNac;
 private LocalDate fechaAct;
-
 public ArrayList<Vehiculo>vehiculo;
 
+//Método toString de Persona
 @Override
 public String toString() {
 	return "Persona: id: " + idPersona + ", nombre: " + nombre + ", apellido: " + apellido + ", Departamento: "
 			+ dptoResidencia + ", Hijos: " + cantHijos + ", F/N: " + fechaNac + ", Fecha de ingreso:"+ fechaAct+ "\n";
 }
 
+//Getters y setters de los atributos
 public LocalDate getFechaAct() {
 	return fechaAct;
 }
@@ -69,6 +71,8 @@ public String getDptoResidencia() {
 public void setDptoResidencia(String dptoResidencia) {
 	this.dptoResidencia = dptoResidencia;
 }
+
+//Constructor de Persona que no considera la lista vehículo
 public Persona(int idPersona, String nombre, String apellido, String dptoResidencia, byte cantHijos, LocalDate fechaNac, LocalDate fechaAct) {
 
 	this.idPersona = idPersona;
@@ -80,7 +84,7 @@ public Persona(int idPersona, String nombre, String apellido, String dptoResiden
 	this.fechaAct=fechaAct;
 }
 
-
+//Constructor de Persona que considera la lista vehículo
 public Persona(int idPersona, String nombre, String apellido, String dptoResidencia, byte cantHijos, LocalDate fechaNac,ArrayList<Vehiculo>vehiculo) {
 	
 	this.idPersona = idPersona;
@@ -91,8 +95,11 @@ public Persona(int idPersona, String nombre, String apellido, String dptoResiden
 	this.fechaNac = fechaNac;
 	this.vehiculo = vehiculo;
 }
+
+//Constructor vacío
 public Persona() {
 	
 }
 
 }
+
